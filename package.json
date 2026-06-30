@@ -1,0 +1,23 @@
+{
+  "name": "shopify-responsive-button-row",
+  "description": "Shopify checkout UI extension: 1-10 equal-width buttons that always stay on a single responsive row.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "komarekj",
+  "private": false,
+  "keywords": [
+    "shopify",
+    "checkout-ui-extension",
+    "polaris",
+    "preact"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/komarekj/shopify-responsive-button-row.git"
+  },
+  "dependencies": {
+    "preact": "^10.10.x",
+    "@preact/signals": "^2.3.x",
+    "@shopify/ui-extensions": "2026.1.x"
+  }
+}

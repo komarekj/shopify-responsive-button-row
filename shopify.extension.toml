@@ -1,0 +1,20 @@
+# Checkout UI extension configuration.
+# https://shopify.dev/docs/api/checkout-ui-extensions/latest/configuration
+#
+# Drop this folder into your Shopify app's `extensions/` directory. The Shopify
+# CLI assigns a `uid` automatically the first time you run `shopify app dev` or
+# `shopify app deploy`, so none is committed here.
+
+api_version = "2026-01"
+
+[[extensions]]
+name = "responsive-button-row"
+handle = "responsive-button-row"
+type = "ui_extension"
+
+# Where the extension renders. `purchase.checkout.block.render` lets the
+# merchant place the block anywhere in checkout via the checkout editor.
+# https://shopify.dev/docs/api/checkout-ui-extensions/latest/extension-targets-overview
+[[extensions.targeting]]
+module = "./src/Checkout.jsx"
+target = "purchase.checkout.block.render"
