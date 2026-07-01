@@ -65,8 +65,9 @@ const BUTTON_COUNT = Math.min(10, Math.max(1, 10)); // change the last number
 
 ## Selection state
 
-Clicking a button marks it as selected and highlights it (a `subdued`
-background). Selection is tracked with a `useState` hook and the clicked value
+Clicking a button marks it as selected and highlights it prominently — a
+`subdued` background, a thick (`large`) border, and a bold, accent-colored
+(`info` tone) number. Selection is tracked with a `useState` hook and the clicked value
 is logged to the console — replace the body of `handleClick` in
 `src/Checkout.jsx` to wire it up to your own logic:
 
@@ -81,9 +82,11 @@ function handleClick(n) {
 
 ## Customizing
 
-- **Highlight style** — the selected cell uses `background="subdued"`; adjust
-  the `background={isSelected ? "subdued" : "transparent"}` prop on the inner
-  `s-box` (valid values: `base`, `subdued`, `transparent`).
+- **Highlight style** — the selected cell combines `background="subdued"`,
+  `borderWidth="large"`, and a bold `s-text` (`type="strong"` +
+  `tone="info"`). Tune any of these on the inner `s-box` / `s-text`. Valid
+  values: `background` — `base`/`subdued`/`transparent`; `borderWidth` —
+  `base`/`large`; `tone` — `auto`/`neutral`/`info`/`success`/`warning`/`critical`.
 
 - **Spacing** — change the grid `gap` (`small-300` by default; `small-400`,
   `small-500`, or `none` for tighter rows).

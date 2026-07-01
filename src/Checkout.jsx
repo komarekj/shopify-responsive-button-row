@@ -37,12 +37,15 @@ function Extension() {
             <s-clickable key={n} onClick={() => handleClick(n)}>
               <s-box
                 border="base"
+                borderWidth={isSelected ? "large" : "base"}
                 borderRadius="base"
                 padding="small-100"
                 background={isSelected ? "subdued" : "transparent"}
               >
                 <s-stack direction="inline" justifyContent="center" alignItems="center">
-                  <s-text>{n}</s-text>
+                  <s-text type={isSelected ? "strong" : undefined} tone={isSelected ? "info" : "auto"}>
+                    {n}
+                  </s-text>
                 </s-stack>
               </s-box>
             </s-clickable>
