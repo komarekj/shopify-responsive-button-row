@@ -3,7 +3,8 @@
 A small [Shopify checkout UI extension](https://shopify.dev/docs/api/checkout-ui-extensions)
 that renders **1–10 equal-width buttons in a single row** inside a bordered card.
 The buttons shrink evenly as the viewport narrows, so they **always stay on one
-line** — they never wrap and never overflow the card.
+line** — they never wrap and never overflow the card. Clicking a button selects
+it and highlights it.
 
 Built with Preact and [Polaris web components](https://shopify.dev/docs/api/checkout-ui-extensions/latest/polaris-web-components)
 (`s-grid`, `s-clickable`, `s-box`), targeting API version **2026-01**.
@@ -65,9 +66,17 @@ const BUTTON_COUNT = Math.min(10, Math.max(1, 10)); // change the last number
 
 ## Selection state
 
-Clicking a button marks it as selected and highlights it prominently — a
-`subdued` background, a thick (`large`) border, and a bold, accent-colored
-(`info` tone) number. Selection is tracked with a `useState` hook and the clicked value
+Clicking a button marks it as selected and highlights it prominently — a green
+check icon appears above a bold, green (`success` tone) number, on a `subdued`
+background with a thicker (`large`) border.
+
+Note: the box fill can only be gray (`s-box background` accepts just
+`base`/`subdued`/`transparent`), so the color in the highlight comes from the
+icon and text, not a colored fill. A colored *filled* button would require
+`s-button variant="primary"`, but `s-button` has a fixed minimum width and
+overlaps once several sit in one row — which is exactly what this layout avoids.
+
+Selection is tracked with a `useState` hook and the clicked value
 is logged to the console — replace the body of `handleClick` in
 `src/Checkout.jsx` to wire it up to your own logic:
 
@@ -83,10 +92,11 @@ function handleClick(n) {
 ## Customizing
 
 - **Highlight style** — the selected cell combines `background="subdued"`,
-  `borderWidth="large"`, and a bold `s-text` (`type="strong"` +
-  `tone="info"`). Tune any of these on the inner `s-box` / `s-text`. Valid
-  values: `background` — `base`/`subdued`/`transparent`; `borderWidth` —
-  `base`/`large`; `tone` — `auto`/`neutral`/`info`/`success`/`warning`/`critical`.
+  `borderWidth="large"`, a green check `s-icon`, and a bold `s-text`
+  (`type="strong"` + `tone="success"`). Tune any of these on the inner
+  `s-box` / `s-text` / `s-icon`. Valid values: `background` —
+  `base`/`subdued`/`transparent`; `borderWidth` — `base`/`large`; `tone` —
+  `auto`/`neutral`/`info`/`success`/`warning`/`critical`.
 
 - **Spacing** — change the grid `gap` (`small-300` by default; `small-400`,
   `small-500`, or `none` for tighter rows).

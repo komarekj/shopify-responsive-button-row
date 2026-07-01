@@ -14,9 +14,12 @@ function Extension() {
   const buttons = Array.from({ length: BUTTON_COUNT }, (_, i) => i + 1);
 
   // Equal-width columns keep every button on a single row at any viewport
-  // width. "minmax(0, 1fr)" (not plain "1fr", which floors at the button's
+  // width. "minmax(0, 1fr)" (not plain "1fr", which floors at the child's
   // intrinsic width and overflows) lets each column shrink evenly so 10
   // buttons always fit inside the card instead of spilling past its edge.
+  //
+  // The buttons are custom s-clickable + s-box cells (NOT s-button, which has
+  // a fixed minimum width and would overlap once there are many in a row).
   const columns = Array.from({ length: BUTTON_COUNT }, () => "minmax(0, 1fr)").join(" ");
 
   // Track which button is currently selected so it can be highlighted.
@@ -35,6 +38,9 @@ function Extension() {
           const isSelected = selected === n;
           return (
             <s-clickable key={n} onClick={() => handleClick(n)}>
+              {/* The box fill can only be gray (base/subdued/transparent), so
+                  the selected state is signalled with color on the content: a
+                  green check icon + bold green number, plus a thicker border. */}
               <s-box
                 border="base"
                 borderWidth={isSelected ? "large" : "base"}
@@ -42,8 +48,9 @@ function Extension() {
                 padding="small-100"
                 background={isSelected ? "subdued" : "transparent"}
               >
-                <s-stack direction="inline" justifyContent="center" alignItems="center">
-                  <s-text type={isSelected ? "strong" : undefined} tone={isSelected ? "info" : "auto"}>
+                <s-stack direction="block" gap="small-500" alignItems="center">
+                  {isSelected && <s-icon type="check" tone="success" size="base" />}
+                  <s-text type={isSelected ? "strong" : undefined} tone={isSelected ? "success" : "auto"}>
                     {n}
                   </s-text>
                 </s-stack>
