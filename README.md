@@ -63,14 +63,27 @@ clamped to the 1–10 range:
 const BUTTON_COUNT = Math.min(10, Math.max(1, 10)); // change the last number
 ```
 
+## Selection state
+
+Clicking a button marks it as selected and highlights it (a `subdued`
+background). Selection is tracked with a `useState` hook and the clicked value
+is logged to the console — replace the body of `handleClick` in
+`src/Checkout.jsx` to wire it up to your own logic:
+
+```jsx
+const [selected, setSelected] = useState(null);
+
+function handleClick(n) {
+  setSelected(n);
+  console.log(`Button clicked: ${n}`);
+}
+```
+
 ## Customizing
 
-- **Click handling** — each button logs to the console; replace the handler in
-  `src/Checkout.jsx`:
-
-  ```jsx
-  <s-clickable onClick={() => console.log(`Button clicked: ${n}`)}>
-  ```
+- **Highlight style** — the selected cell uses `background="subdued"`; adjust
+  the `background={isSelected ? "subdued" : "transparent"}` prop on the inner
+  `s-box` (valid values: `base`, `subdued`, `transparent`).
 
 - **Spacing** — change the grid `gap` (`small-300` by default; `small-400`,
   `small-500`, or `none` for tighter rows).
